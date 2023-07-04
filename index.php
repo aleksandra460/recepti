@@ -1,5 +1,10 @@
 <?php 
 
-echo("<h1>Work in progress</h1><p>Please come back later</p>");
+session_start();
+
+require_once("view/html/header.php");
+$_SESSION["current_page"] = "home";
 
 ?>
+
+<link rel="stylesheet" href="view/css/stylesheet.css" />

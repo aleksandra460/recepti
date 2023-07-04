@@ -1,0 +1,43 @@
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+* {
+    font-family: Arial;
+    color: black;
+    text-decoration: none;
+}
+
+header div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.logo-image {
+    width: 50px;
+}
+
+.logo-text {
+    font-weight: bold;
+    font-size: 22px;
+    margin-left: 10px;
+}
+
+.menu-link {
+    margin-right: 10px;
+}
+
+.menu-link:hover {
+    color: black;
+}
+
+.inactive {
+    color: gray;
+}
+
+.logo-div {
+    margin-left: 10px;
+}
