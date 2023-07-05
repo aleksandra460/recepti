@@ -28,6 +28,7 @@ header div {
 
 .menu-link {
     margin-right: 10px;
+    margin-left: 10px;
 }
 
 .menu-link:hover {
@@ -46,4 +47,95 @@ footer p {
     color: gray;
     font-size: 12px;
     text-align: center;
+}
+
+.page-span {
+    text-decoration: underline;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+}
+
+.login-form * {
+    margin-top: 10px;
+}
+
+.login-form button {
+    margin-top: 20px;
+    height: 35px;
+}
+
+.login-forms-container {
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.login-forms-container hr {
+    display: none;
+}
+
+.main-recipes {
+    align-items: center;
+}
+
+.profile-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-table-div {
+    overflow-x: auto;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.profile-table {
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.profile-table tbody td {
+    padding: 10px 20px;
+    border: 1px solid black;
+}
+
+@media screen and (max-width: 768px) {
+    header {
+        flex-direction: column;
+    }
+
+    .menu-links-div {
+        display: flex;
+        flex-direction: column;
+        align-items: baseline;
+    }
+
+    .menu-link {
+        margin: 10px;
+    }
+
+    .menu-separator {
+        display: none;
+    }
+
+    .login-forms-container hr {
+        display: block;
+        width: 90vw;
+        margin: 30px 0;
+    }
+
+    .login-forms-container {
+        flex-direction: column;
+        align-items: center;
+    }
 }
