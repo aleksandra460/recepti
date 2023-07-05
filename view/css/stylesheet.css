@@ -41,3 +41,9 @@ header div {
 .logo-div {
     margin-left: 10px;
 }
+
+footer p {
+    color: gray;
+    font-size: 12px;
+    text-align: center;
+}

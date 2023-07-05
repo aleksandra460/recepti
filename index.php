@@ -1,10 +1,15 @@
 <?php 
 
+require('flight/Flight.php');
+require('conf/db.php');
+
 session_start();
 
-require_once("view/html/header.php");
-$_SESSION["current_page"] = "home";
+Flight::route("GET /", function() {
+    $_SESSION["current_page"] = "home";
+    require_once("view/html/home.php");
+});
+
+Flight::start();
 
 ?>
-
-<link rel="stylesheet" href="view/css/stylesheet.css" />
