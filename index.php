@@ -174,7 +174,7 @@ Flight::route("GET /ban", function() {
     $ban = $_GET["ban"];
 
     $userController = new UserController();
-    $userController->banUser($id, $ban);
+    $userController->banUser($user_id, $ban);
 });
 
 Flight::route("GET /make-admin", function() {
@@ -186,7 +186,7 @@ Flight::route("GET /make-admin", function() {
     $user_id = $_GET["id"];
 
     $userController = new UserController();
-    $userController->makeAdmin($id);
+    $userController->makeAdmin($user_id);
 });
 
 Flight::route("POST /register", function() {
@@ -201,7 +201,7 @@ Flight::route("POST /register", function() {
 
 Flight::route("GET /about-us", function() {
     require_once("view/html/about-us.php");
-    
+
 });
 
 Flight::start();

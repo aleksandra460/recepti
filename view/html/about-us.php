@@ -22,7 +22,7 @@
             This project was created in order to make sharing cooking recipes easier, and
             for the purposes of Internet Programming class.
             <br><br>
-            If you have any questions for me, be sure to fill the form below.
+            If you have any questions for me, be sure to fill out the form below.
     </main>
 
     <?php 
