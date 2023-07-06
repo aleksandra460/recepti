@@ -6,6 +6,7 @@ require('conf/server.php');
 require('model/recipyDAO.php');
 require('model/userDAO.php');
 require('model/voteDAO.php');
+require('model/surveyDAO.php');
 require('model/commentDAO.php');
 require('controller/userController.php');
 require('controller/recipyController.php');
@@ -26,6 +27,7 @@ Flight::route("GET /", function() {
 Flight::route("GET /profile", function() {
     $_SESSION["current_page"] = "profile";
     unset($_SESSION["loginerror"]);
+    unset($_SESSION["registererror"]);
 
     if (isset($_GET["loginerror"])) {
         $_SESSION["loginerror"] = $_GET["loginerror"];
@@ -136,6 +138,70 @@ Flight::route("POST /write", function() {
 
     $recipyController = new RecipyController();
     $recipyController->createRecipy($_SESSION["user"]["id"], $title, $img, $body);
+});
+
+Flight::route("GET /survey", function() {
+    if (!isset($_SESSION["user"]) || !isset($_GET["answer"])) {
+        header("Location: " . getFullServerPath() . "/profile");
+        exit();
+    }
+
+    $user_id = $_SESSION["user"]["id"];
+    $answer = $_GET["answer"];
+    $userController = new UserController();
+    $userController->answerSurvey($user_id, $answer);
+});
+
+Flight::route("GET /admin", function() {
+    if (!isset($_SESSION["user"]) || $_SESSION["user"]["is_admin"] != 1) {
+        header("Location: " . getFullServerPath() . "/profile");
+        exit();
+    }
+
+    $_SESSION["current_page"] = "admin";
+
+    $userController = new UserController();
+    $userController->getAdminPanel();
+});
+
+Flight::route("GET /ban", function() {
+    if (!isset($_SESSION["user"]) || $_SESSION["user"]["is_admin"] != 1 || !isset($_GET["id"]) || !isset($_GET["ban"])) {
+        header("Location: " . getFullServerPath() . "/admin");
+        exit();
+    }
+
+    $user_id = $_GET["id"];
+    $ban = $_GET["ban"];
+
+    $userController = new UserController();
+    $userController->banUser($id, $ban);
+});
+
+Flight::route("GET /make-admin", function() {
+    if (!isset($_SESSION["user"]) || $_SESSION["user"]["is_admin"] != 1 || !isset($_GET["id"])) {
+        header("Location: " . getFullServerPath() . "/admin");
+        exit();
+    }
+
+    $user_id = $_GET["id"];
+
+    $userController = new UserController();
+    $userController->makeAdmin($id);
+});
+
+Flight::route("POST /register", function() {
+    $username = $_POST["username"];
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    $confirm_password = $_POST["confirm_password"];
+
+    $userController = new UserController();
+    $userController->createUser($username, $email, $password, $confirm_password);
+});
+
+Flight::route("GET /about-us", function() {
+    require_once("view/html/about-us.php");
+    
 });
 
 Flight::start();

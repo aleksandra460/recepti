@@ -12,7 +12,7 @@
         if (isset($_SESSION["user"]) && $_SESSION["user"]["is_admin"] == 1) {
             ?>
             <span class="menu-separator">&nbsp;|&nbsp;</span>
-            <a class="menu-link <?= isset($_SESSION["current_page"]) ? (($_SESSION["current_page"] == "admin") ? "" : "inactive") : "inactive" ?>" href="#">Admin</a>
+            <a class="menu-link <?= isset($_SESSION["current_page"]) ? (($_SESSION["current_page"] == "admin") ? "" : "inactive") : "inactive" ?>" href="<?= getFullServerPath() . "/admin" ?>">Admin</a>
             <?php
         }
         ?>

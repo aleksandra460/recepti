@@ -27,12 +27,15 @@
         <div>
             <form class="login-form" action="<?= getFullServerPath() . "/register" ?>" method="POST">
                 <h3>Register</h3>
+                <?= (isset($_SESSION["registererror"]) ? "<p style='color:red;'> " . $_SESSION["registererror"] . "</p>" : "") ?>
                 <label for="username">Username:</label>
                 <input type="text" name="username" />
                 <label for="email">Email:</label>
                 <input type="email" name="email" />
                 <label for="password">Password:</label>
                 <input type="password" name="password" />
+                <label for="password">Confirm password:</label>
+                <input type="password" name="confirm_password" />
                 <button type="submit">Register</button>
             </form>
         </div>

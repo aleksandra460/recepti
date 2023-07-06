@@ -125,6 +125,22 @@ main {
     align-items: center;
 }
 
+.survey-button {
+    padding: 10px 40px;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+
+.yes {
+    background-color: rgb(101, 225, 101);
+    border: 2px solid green;
+}
+
+.no {
+    background-color: rgb(227, 121, 121);
+    border: 2px solid red;
+}
+
 .write-form {
     display: flex;
     flex-direction: column;

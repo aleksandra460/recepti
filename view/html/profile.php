@@ -13,7 +13,15 @@
 
     <main class="profile-main">
         <?php
-           
+            if (!$surveyDAO->getSurvey($_SESSION["user"]["id"])) {
+                ?>
+                <h3> User survey: Do you like the website? </h3>
+                <a class="survey-button yes" href="<?= getFullServerPath() . "/survey?answer=1" ?>">Yes</a>
+                <a class="survey-button no" href="<?= getFullServerPath() . "/survey?answer=0" ?>">No</a>
+                <?php
+            } else {
+                echo("<h3>Thank you for participating in the user survey.</h3>");
+            }
         ?>
         <div class="profile-table-div">
             <?php 
