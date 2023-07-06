@@ -109,6 +109,35 @@ main {
     border: 1px solid black;
 }
 
+.comment-textarea {
+    width: 300px;
+    height: 200px;
+}
+
+.comment-button {
+    width: 100%;
+    height: 35px;
+}
+
+.main-post, .recipe-post {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.write-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.write-form * {
+    margin-bottom: 10px;
+}
+
+.menu-separator {
+    cursor: default;
+}
+
 @media screen and (max-width: 768px) {
     header {
         flex-direction: column;

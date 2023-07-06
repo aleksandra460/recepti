@@ -12,6 +12,9 @@
     ?>
 
     <main class="profile-main">
+        <?php
+           
+        ?>
         <div class="profile-table-div">
             <?php 
             $u = $_SESSION["user"];
@@ -42,7 +45,7 @@
                 foreach ($posts as $post) {
                     ?>
                     <li>
-                        <a href="<?= getFullServerPath() . "/posts/" . $post["id"] ?>"><?= $post["title"] ?></a>
+                        <a href="<?= getFullServerPath() . "/recipes?id=" . $post["id"] ?>"><?= $post["title"] ?></a>
                     </li>
                     <?php
                 }

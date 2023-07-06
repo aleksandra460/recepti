@@ -16,6 +16,12 @@
     </main>
 
     <?php 
+    
+    require_once("view/html/last-seen-post.php");
+    
+    ?>
+
+    <?php 
     require_once("view/html/footer.php");
     ?>
 </body>

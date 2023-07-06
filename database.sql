@@ -30,6 +30,16 @@ CREATE TABLE votes (
     CONSTRAINT votes_fk_recipy FOREIGN KEY (recipy_id) REFERENCES recipies(id)
 );
 
+CREATE TABLE comments (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    recipy_id INT NOT NULL,
+    body VARCHAR(2000) NOT NULL,
+    create_time TIMESTAMP NOT NULL,
+    CONSTRAINT comments_fk_user FOREIGN KEY (user_id) REFERENCES users(id),
+    CONSTRAINT comments_fk_recipy FOREIGN KEY (recipy_id) REFERENCES recipies(id)
+);
+
 CREATE TABLE contact_forms (
     id INT PRIMARY KEY AUTO_INCREMENT,
     email VARCHAR(100) NOT NULL,

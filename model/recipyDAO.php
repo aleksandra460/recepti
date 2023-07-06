@@ -48,19 +48,22 @@ class recipyDAO {
         return $results;
     }
 
-    public function createRecipy($user_id, $title, $body) {
+    public function createRecipy($user_id, $title, $img, $body) {
         $db = new DB();
         $conn = $db->createInstance();
 
-        $insert_query = "INSERT INTO recipies (title, body, user_id, create_time) VALUES (:title, :body, :user_id, NOW())";
+        $insert_query = "INSERT INTO recipies (title, body, img, user_id, create_time) VALUES (:title, :body, :img, :user_id, NOW())";
 
         $stmt = $conn->prepare($insert_query);
         $stmt->bindParam(":title", $title);
         $stmt->bindParam(":body", $body);
+        $stmt->bindParam(":img", $img);
         $stmt->bindParam(":user_id", $user_id);
         $stmt->execute();
 
-        $result = $stmt->rowCount();
+        $result = [];
+        $result["count"] = $stmt->rowCount();
+        $result["lastInsertId"] = $conn->lastInsertId();
 
         return $result;
     }

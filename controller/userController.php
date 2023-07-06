@@ -18,7 +18,13 @@ class userController {
         if (!$result) {
             $_SESSION["loginerror"] = "Username or password is invalid";
             require_once("view/html/login.php");
+            exit();
         } else {
+            if ($result["is_banned"] == 1) {
+                $_SESSION["loginerror"] = "This account has been banned";
+                require_once("view/html/login.php");
+                exit();
+            }
             $_SESSION["user"] = $result;
             header("Location: " . getFullServerPath());
             exit();

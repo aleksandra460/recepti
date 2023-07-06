@@ -5,6 +5,8 @@ require('conf/db.php');
 require('conf/server.php');
 require('model/recipyDAO.php');
 require('model/userDAO.php');
+require('model/voteDAO.php');
+require('model/commentDAO.php');
 require('controller/userController.php');
 require('controller/recipyController.php');
 
@@ -50,6 +52,90 @@ Flight::route("GET /logout", function() {
     session_unset();
     header("Location: " . getFullServerPath());
     exit();
+});
+
+Flight::route("GET /recipes", function() {
+    unset($_SESSION["commenterror"]);
+    unset($_SESSION["voteerror"]);
+    
+    if (!isset($_GET["id"])) {
+        header("Location: " . getFullServerPath());
+        exit();
+    }
+
+    $id = $_GET["id"];
+    $recipyController = new RecipyController();
+    $recipyController->getRecipe($id);
+});
+
+Flight::route("POST /comments", function() {
+    if (!isset($_SESSION["user"])) {
+        header("Location: " . getFullServerPath() . "/profile");
+        exit();
+    }
+    $user_id = $_SESSION["user"]["id"];
+    $recipy_id = $_POST["post_id"];
+    $body = trim($_POST["body"]);
+    $recipyController = new RecipyController();
+
+    if ($body == "") {
+        $_SESSION["commenterror"] = "Comment field cannot be empty";
+        $recipyController->getRecipe($recipy_id);
+        exit();
+    }
+
+    $recipyController->createComment($user_id, $recipy_id, $body);
+});
+
+Flight::route("POST /vote", function() {
+    if (!isset($_SESSION["user"])) {
+        header("Location: " . getFullServerPath() . "/profile");
+        exit();
+    }
+    
+    $vote = $_POST["vote"];
+    $recipyController = new RecipyController();
+    if ($vote > 5 || $vote < 1) {
+        $_SESSION["voteerror"] = "Vote must be between 1 and 5";
+        $recipyController->getRecipe($_POST["recipy_id"]);
+        exit();
+    }
+
+    $recipy_id = $_POST["recipy_id"];
+    $user_id = $_SESSION["user"]["id"];
+    $recipyController->createVote($user_id, $recipy_id, $vote);
+});
+
+Flight::route("GET /write", function() {
+    if (!isset($_SESSION["user"])) {
+        header("Location: " . getFullServerPath() . "/profile");
+        exit();
+    }
+
+    unset($_SESSION["writeerror"]);
+
+    $_SESSION["current_page"] = "write";
+    require_once("view/html/write-recipe.php");
+});
+
+Flight::route("POST /write", function() {
+    if (!isset($_SESSION["user"])) {
+        header("Location: " . getFullServerPath() . "/profile");
+        exit();
+    }
+
+    $title = $_POST["title"];
+    $img = $_POST["img"];
+    $body = $_POST["body"];
+
+    if ($title == "" || $img == "" || $body == "") {
+        $_SESSION["writeerror"] = "All fields are required";
+        require_once("view/html/write-recipe.php");
+        exit();
+    }
+
+    $recipyController = new RecipyController();
+    $recipyController->createRecipy($_SESSION["user"]["id"], $title, $img, $body);
 });
 
 Flight::start();
