@@ -7,9 +7,9 @@ class DB{
     public static function createInstance($config = null)
     {
         $settings['dbname'] = 'recepti';
-        $settings['dbhost'] = '127.0.0.1';
+        $settings['dbhost'] = 'localhost';
         $settings['dbuser'] = 'root';
-        $settings['dbpass'] = 'password';
+        $settings['dbpass'] = '';
 
         try{
             $dsn = 'mysql:dbname=' . $settings['dbname'] . ';host=' . $settings['dbhost'];

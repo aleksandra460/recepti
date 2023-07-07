@@ -2,8 +2,8 @@
 
 $server_config = [
     "host" => $_SERVER["HTTP_HOST"],
-    "schema" => "http://",
-    "path" => "/recepti",
+    "schema" => "https://",
+    "path" => "",
 ];
 
 function getFullServerPath() {
